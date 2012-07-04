@@ -3,27 +3,48 @@
  *
  * usage for example:
  *
- * <code lang="javascript">
- * $('.article').smallscroll({
- *     element: '.article_container',
- *     upButton: '.page_arrow_toparrow',
- *     downButton: '.page_arrow_botarrow',
+ * structure
+ * <pre lang="html">
+ * <div class="mod-scroll">
+ *     <div class="scroll-element">
+ *     a lot of content / image list etc.
+ *     </div>
+ * </div>
+ * </pre>
+ *
+ * style
+ * <pre lang="css">
+ * .mod-scroll {
+ *     height: 200px;
+ *     overflow: hidden;
+ *     position: relative;
+ * }
+ * .mod-scroll .scroll-element {
+ *     position: relative;
+ * }
+ * </pre>
+ *
+ * <pre lang="javascript">
+ * $('.mod-scroll').smallscroll({
+ *     element: '.scroll-element',
+ *     upButton: '.scroll-arrow-up',
+ *     downButton: '.scroll-arrow-down',
  *     step: 164
  * });
- * </code>
+ * </pre>
  *
  * step can also passed by callback:
  *
- * <code lang="javascript">
- * $('.article').smallscroll({
- *     element: '.article_container',
- *     upButton: '.page_arrow_toparrow',
- *     downButton: '.page_arrow_botarrow',
+ * <pre lang="javascript">
+ * $('.mod-scroll').smallscroll({
+ *     element: '.scroll-element',
+ *     upButton: '.scroll-arrow-up',
+ *     downButton: '.scroll-arrow-down',
  *     step: function() {
- *         return this.element.find('>.pastevent_list:first').outerHeight(true);
+ *         return this.element.find('>.item-list:first').outerHeight(true);
  *     }
  * });
- * </code>
+ * </pre>
  *
  * @author micate<micate@qq.com>
  * @homepage http://github.com/micate/smallscroll
@@ -53,7 +74,7 @@ Scroll.prototype = {
 
         // 初始化基础元素
         this.container = this.get(options.container);
-        this.element = this.get(options.element);
+        this.element = this.get(options.element, this.container);
         this.upButton = this.get(options.upButton);
         this.downButton = this.get(options.downButton);
 
@@ -86,8 +107,8 @@ Scroll.prototype = {
         this.options = options;
         return this;
     },
-    get: function(selector) {
-        return selector && selector.jquery ? selector : $(selector);
+    get: function(selector, context) {
+        return selector && selector.jquery ? selector : $(selector, context || document);
     },
     up: function() {
         var top = Math.abs(this.element.position().top);

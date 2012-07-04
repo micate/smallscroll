@@ -2,11 +2,32 @@ a small jQuery scroll plugin.
 
 usage for example:
 
+structure
+<pre lang="html">
+<div class="mod-scroll">
+    <div class="scroll-element">
+    a lot of content / image list etc.
+    </div>
+</div>
+</pre>
+
+style
+<pre lang="css">
+.mod-scroll {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+.mod-scroll .scroll-element {
+    position: relative;
+}
+</pre>
+
 <pre lang="javascript">
-$('.article').smallscroll({
-    element: '.article_container',
-    upButton: '.page_arrow_toparrow',
-    downButton: '.page_arrow_botarrow',
+$('.mod-scroll').smallscroll({
+    element: '.scroll-element',
+    upButton: '.scroll-arrow-up',
+    downButton: '.scroll-arrow-down',
     step: 164
 });
 </pre>
@@ -14,12 +35,12 @@ $('.article').smallscroll({
 step can also passed by callback:
 
 <pre lang="javascript">
-$('.article').smallscroll({
-    element: '.article_container',
-    upButton: '.page_arrow_toparrow',
-    downButton: '.page_arrow_botarrow',
+$('.mod-scroll').smallscroll({
+    element: '.scroll-element',
+    upButton: '.scroll-arrow-up',
+    downButton: '.scroll-arrow-down',
     step: function() {
-        return this.element.find('>.pastevent_list:first').outerHeight(true);
+        return this.element.find('>.item-list:first').outerHeight(true);
     }
 });
 </pre>
