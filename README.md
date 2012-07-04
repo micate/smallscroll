@@ -4,11 +4,11 @@ usage for example:
 
 structure
 <pre lang="html">
-<div class="mod-scroll">
-    <div class="scroll-element">
+&lt;div class="mod-scroll"&gt;
+    &lt;div class="scroll-element"&gt;
     a lot of content / image list etc.
-    </div>
-</div>
+    &lt;/div&gt;
+&lt;/div>
 </pre>
 
 style
